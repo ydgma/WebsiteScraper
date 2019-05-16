@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -35,11 +36,9 @@ public class Scraper {
         return document;
     }
 
-    public List<Element> getChildClasses(String parentClassName, String childClassName) {
-        return document.getElementsByClass(parentClassName)
-                .stream()
-                .filter(elements -> elements.hasClass(childClassName))
-                .collect(Collectors.toList());
+    public List<Element> getChildClasses(String parentClassId, String childClassName) {
+        return new ArrayList<>(document.getElementById(parentClassId)
+                .getElementsByClass(childClassName));
     }
 
     public Element getChildClassContainingTextByParentId(String parentClassId, String childClassName,String textToContain) {

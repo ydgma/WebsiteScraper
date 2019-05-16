@@ -12,14 +12,21 @@ public class SainsBurysItemImpl implements SainsBurysItem{
         this.element = element;
     }
 
+    private String createItemInfoUrl(String extractedUrl) {
+        // need to do some funky regex
+        return null;
+    }
+
     @Override
     public String getTitle() {
-        return element.getElementsByClass("productNameAndPromotions").text();
+        return element.getElementsByClass("productNameAndPromotions")
+                .first()
+                .text();
     }
 
     @Override
     public String getKcal_per_100g() {
-       return  sainsBurysItemInfo.getKclper100g();
+        return createItemInfoUrl(element.getElementsByClass("productNameAndPromotions").first().html());
     }
 
     @Override
@@ -30,5 +37,10 @@ public class SainsBurysItemImpl implements SainsBurysItem{
     @Override
     public String getDescription() {
        return sainsBurysItemInfo.getDescription();
+    }
+
+    @Override
+    public Element getElement() {
+        return element;
     }
 }

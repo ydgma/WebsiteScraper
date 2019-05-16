@@ -10,6 +10,8 @@ public class SainsBurysItemInfoImpl implements SainsBurysItemInfo{
         scraper = new Scraper(url);
     }
 
+
+
     @Override
     public String getKclper100g() {
        return scraper.getChildClassWithTextContaining("tableRow0","nutritionLevel1","kcal").text();
