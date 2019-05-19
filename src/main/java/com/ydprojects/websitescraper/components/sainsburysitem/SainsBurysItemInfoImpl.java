@@ -12,7 +12,7 @@ public class SainsBurysItemInfoImpl implements SainsBurysItemInfo{
 
     @Override
     public String getKclper100g() {
-       return scraper.getChildClassWithTextContaining("tableRow0","nutritionLevel1","kcal").text();
+       return scraper.getChildClassWithTextContaining("information","nutritionLevel1","kcal").text();
     }
 
     @Override

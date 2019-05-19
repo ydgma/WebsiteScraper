@@ -19,8 +19,8 @@ public class SainsBurysItemImpl implements SainsBurysItem{
 
     private String createItemInfoUrl() {
         String extractedHTML = element.getElementsByClass("productNameAndPromotions").first().html();
-        String REGEX = "\">.*|\\../|.*?f=\"";
-        Pattern pattern = Pattern.compile(REGEX);
+        String regex = "\">.*|\\../|.*?f=\"";
+        Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(extractedHTML);
         extractedHTML = matcher.replaceAll("");
 

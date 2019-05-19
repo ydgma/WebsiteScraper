@@ -37,8 +37,13 @@ public class Scraper {
     }
 
     public List<Element> getChildClasses(String parentClassId, String childClassName) {
-        return new ArrayList<>(document.getElementById(parentClassId)
+        List<Element> listOfChildClasses;
+
+        listOfChildClasses = new ArrayList<>(document.getElementById(parentClassId)
                 .getElementsByClass(childClassName));
+
+        return listOfChildClasses;
+
     }
 
     public Element getChildClassContainingTextByParentId(String parentClassId, String childClassName,String textToContain) {
@@ -49,8 +54,10 @@ public class Scraper {
                 .get();
     }
 
-    public Element getChildClassWithTextContaining(String parentClassName, String childClassName, String textToExpect) {
-        return getChildClasses(parentClassName,childClassName)
+    public Element getChildClassWithTextContaining(String parentClassId, String childClassName, String textToExpect) {
+        List<Element> listOfElements = getChildClasses(parentClassId,childClassName);
+
+        return getChildClasses(parentClassId,childClassName)
                 .stream()
                 .filter(element -> element.text().contains(textToExpect))
                 .findFirst()

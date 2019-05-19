@@ -7,6 +7,7 @@ public class Item {
     private String unit_price;
     private String description;
 
+
     public Item(String title, String kcal_per_100g, String unit_price, String description) {
         this.title = title;
         this.kcal_per_100g = kcal_per_100g;
