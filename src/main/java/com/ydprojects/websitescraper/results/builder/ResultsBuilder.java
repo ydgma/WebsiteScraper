@@ -6,10 +6,12 @@ import com.ydprojects.websitescraper.components.sainsburysitem.SainsBurysItemImp
 import java.util.List;
 
 public class ResultsBuilder {
-
+    private List<SainsBurysItemImpl> listOfItems;
 
 
     public ResultsBuilder(List<SainsBurysItemImpl> listOfItems) {
-
+        this.listOfItems = listOfItems;
     }
+
+
 }

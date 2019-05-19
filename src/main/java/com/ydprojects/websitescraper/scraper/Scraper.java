@@ -3,20 +3,20 @@ package com.ydprojects.websitescraper.scraper;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.swing.text.html.Option;
 import java.io.IOException;
-import java.util.*;
-import java.util.function.Function;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
+
 
 public class Scraper {
     private static final Logger LOG = LoggerFactory.getLogger(Scraper.class);
-    private Function<List<Element>,Element> getElement = (k) -> k.stream()
-            .findFirst()
-            .get();
-
     private Document document;
 
     public Scraper(String url) {
@@ -26,7 +26,6 @@ public class Scraper {
         } catch (IOException e) {
             LOG.info("{}", e);
         }
-
     }
 
     public Document getPage() {
@@ -51,5 +50,17 @@ public class Scraper {
                 .map(Element::text);
     }
 
+    public Optional<String> getFIrstParagraphFromAChildClass(String parentClassId, String childClassName) {
+        return document.getElementById(parentClassId).getElementsByClass(childClassName)
+                .stream()
+                .findFirst()
+                .map(element -> element.getElementsByTag("p")
+                        .stream()
+                        .map(element1 -> element1.getElementsByTag("p"))
+                        .filter(Elements::hasText)
+                        .findFirst()
+                        .map(Elements::text)).get();
+        
+    }
 
 }
