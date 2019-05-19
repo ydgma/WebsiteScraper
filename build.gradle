@@ -18,6 +18,7 @@ dependencies {
     compile group: 'ch.qos.logback', name:'logback-classic', version: '1.0.13'
     compile group: 'org.jsoup', name: 'jsoup', version: '1.7.2'
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.0.1'
+    implementation 'com.google.code.gson:gson:2.8.5'
 }
 
 mainClassName = 'com.ydprojects.websitescraper.Application'

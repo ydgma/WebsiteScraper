@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 public class Scraper {
     private static final Logger LOG = LoggerFactory.getLogger(Scraper.class);
     private Document document;
+    private static final String TAG_NAME = "p";
 
     public Scraper(String url) {
 
@@ -54,13 +55,13 @@ public class Scraper {
         return document.getElementById(parentClassId).getElementsByClass(childClassName)
                 .stream()
                 .findFirst()
-                .map(element -> element.getElementsByTag("p")
+                .map(element -> element.getElementsByTag(TAG_NAME)
                         .stream()
-                        .map(element1 -> element1.getElementsByTag("p"))
+                        .map(element1 -> element1.getElementsByTag(TAG_NAME))
                         .filter(Elements::hasText)
                         .findFirst()
                         .map(Elements::text)).get();
-        
+
     }
 
 }
