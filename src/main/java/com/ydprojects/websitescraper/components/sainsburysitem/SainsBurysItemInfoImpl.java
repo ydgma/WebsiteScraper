@@ -1,12 +1,14 @@
 package com.ydprojects.websitescraper.components.sainsburysitem;
 
 import com.ydprojects.websitescraper.scraper.Scraper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Optional;
 
 public class SainsBurysItemInfoImpl implements SainsBurysItemInfo{
-
-    Scraper scraper;
+    private static final Logger LOG = LoggerFactory.getLogger(SainsBurysItemInfoImpl.class);
+    private Scraper scraper;
     private static final String PARENT_CLASS_ID = "information";
 
     public SainsBurysItemInfoImpl (String url) {

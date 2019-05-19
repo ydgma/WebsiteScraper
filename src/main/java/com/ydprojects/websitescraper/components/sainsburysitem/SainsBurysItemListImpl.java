@@ -26,9 +26,7 @@ public class SainsBurysItemListImpl implements SainsBurysItemList {
 
     private void populateItemList() {
         scraper.getChildClasses("productLister","gridItem")
-                .forEach(element -> {
-                    listOfItems.add(new SainsBurysItemImpl(element));
-                });
+                .forEach(element -> listOfItems.add(new SainsBurysItemImpl(element)));
     }
 
     @Override

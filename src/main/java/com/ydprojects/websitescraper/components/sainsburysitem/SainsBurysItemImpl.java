@@ -1,19 +1,19 @@
 package com.ydprojects.websitescraper.components.sainsburysitem;
 
-import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import javax.swing.text.html.Option;
 import java.math.BigDecimal;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class SainsBurysItemImpl implements SainsBurysItem{
-
-    Element element;
+    private static final Logger LOG = LoggerFactory.getLogger(SainsBurysItem.class);
+    private Element element;
     private SainsBurysItemInfo sainsBurysItemInfo;
-    String initialUrl = "https://jsainsburyplc.github.io/serverside-test/site/www.sainsburys.co.uk/";
+    private static final String INITIAL_URL = "https://jsainsburyplc.github.io/serverside-test/site/www.sainsburys.co.uk/";
 
     public SainsBurysItemImpl (Element element) {
         this.element = element;
@@ -27,7 +27,7 @@ public class SainsBurysItemImpl implements SainsBurysItem{
         Matcher matcher = pattern.matcher(extractedHTML);
         extractedHTML = matcher.replaceAll("");
 
-        return initialUrl + extractedHTML;
+        return INITIAL_URL + extractedHTML;
     }
 
     @Override

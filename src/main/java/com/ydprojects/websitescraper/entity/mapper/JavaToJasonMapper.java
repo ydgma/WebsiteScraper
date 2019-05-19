@@ -19,7 +19,6 @@ public class JavaToJasonMapper {
 
       LOG.info(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(resultsBuilder));
 
-     // LOG.info(REGEX);
     }
 
 

@@ -1,7 +1,6 @@
 package com.ydprojects.websitescraper.results.builder;
 
 
-import com.ydprojects.websitescraper.components.sainsburysitem.SainsBurysItem;
 import com.ydprojects.websitescraper.components.sainsburysitem.SainsBurysItemImpl;
 import com.ydprojects.websitescraper.components.sainsburysitem.SainsBurysItemListImpl;
 import com.ydprojects.websitescraper.entity.data.Item;
@@ -16,10 +15,10 @@ import java.util.Map;
 
 
 public class ResultsBuilder {
+    private static final Logger LOG = LoggerFactory.getLogger(ResultsBuilder.class);
     private static final List<SainsBurysItemImpl> listOfValuesScraped = new SainsBurysItemListImpl().getItemList();
     private List<Item> itemList = new ArrayList<>();
     private Map<String,BigDecimal> total = new HashMap<>();
-    private static final Logger LOG = LoggerFactory.getLogger(ResultsBuilder.class);
 
     public ResultsBuilder() {
        populateItems();
@@ -58,7 +57,7 @@ public class ResultsBuilder {
         BigDecimal vatPercentage = new BigDecimal(1.20);
         BigDecimal vat = initial.divide(vatPercentage,2,BigDecimal.ROUND_HALF_EVEN);
         vat = vat.subtract(initial).multiply(new BigDecimal(-1));
-        
+
         BigDecimal vatRounded = vat.setScale(2,BigDecimal.ROUND_HALF_EVEN);
         total.put("vat",vatRounded);
     }
