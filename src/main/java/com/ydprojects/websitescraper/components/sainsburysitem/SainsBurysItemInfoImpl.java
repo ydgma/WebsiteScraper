@@ -7,20 +7,23 @@ import java.util.Optional;
 public class SainsBurysItemInfoImpl implements SainsBurysItemInfo{
 
     Scraper scraper;
+    private static final String PARENT_CLASS_ID = "information";
 
     public SainsBurysItemInfoImpl (String url) {
         scraper = new Scraper(url);
     }
 
     @Override
-    public String getKclper100g() {
+    public Optional<String> getKclper100g() {
 
-       return scraper.getChildClassWithTextContaining("information","nutritionLevel1","kcal")
-               .text().replaceAll("[^\\d]","");
+        Optional <String> optional = scraper.getChildClassContainingTextByParentId(PARENT_CLASS_ID,"nutritionLevel1","kcal");
+
+        return optional.map(s -> s.replaceAll("[^\\d]", ""));
     }
 
     @Override
-    public String getDescription() {
-        return scraper.getChildClassContainingTextByParentId("information","productText","by Sainsbury's").text();
+    public Optional<String> getDescription() {
+        return scraper.getChildClassContainingTextByParentId(PARENT_CLASS_ID,"productText","by Sainsbury's");
+
     }
 }

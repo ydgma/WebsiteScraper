@@ -12,7 +12,7 @@ public class SainsBurysItemListImpl implements SainsBurysItemList {
     private static final Logger LOG = LoggerFactory.getLogger(SainsBurysItemListImpl.class);
     private static final String URL = "https://jsainsburyplc.github.io/serverside-test/site/www.sainsburys.co.uk/webapp/wcs/stores/servlet/gb/groceries/berries-cherries-currants6039.html";
     private Document document;
-    private List<SainsBurysItem> listOfItems = new ArrayList<>();
+    private List<SainsBurysItemImpl> listOfItems = new ArrayList<>();
     Scraper scraper;
 
     public SainsBurysItemListImpl() {
@@ -32,7 +32,7 @@ public class SainsBurysItemListImpl implements SainsBurysItemList {
     }
 
     @Override
-    public List<SainsBurysItem> getItemList() {
+    public List<SainsBurysItemImpl> getItemList() {
         populateItemList();
         return listOfItems;
     }

@@ -9,9 +9,9 @@ import java.util.Optional;
 public interface SainsBurysItem {
 
     String getTitle();
-    String getKcal_per_100g();
+    Optional<String> getKcal_per_100g();
     BigDecimal getUnit_price();
-    String getDescription();
+    Optional<String> getDescription();
     Element getElement();
 
 }

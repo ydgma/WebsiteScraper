@@ -7,10 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Objects;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -46,23 +43,13 @@ public class Scraper {
 
     }
 
-    public Element getChildClassContainingTextByParentId(String parentClassId, String childClassName,String textToContain) {
+    public Optional<String> getChildClassContainingTextByParentId(String parentClassId, String childClassName,String textToContain) {
         return document.getElementById(parentClassId).getElementsByClass(childClassName)
                 .stream()
                 .filter(element -> element.text().contains(textToContain))
                 .findFirst()
-                .get();
+                .map(Element::text);
     }
-
-    public Element getChildClassWithTextContaining(String parentClassId, String childClassName, String textToExpect) {
-        return getChildClasses(parentClassId,childClassName)
-                .stream()
-                .filter(element -> element.text().contains(textToExpect))
-                .findFirst()
-                .get();
-
-    }
-
 
 
 }

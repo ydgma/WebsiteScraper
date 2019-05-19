@@ -4,7 +4,7 @@ import java.util.Optional;
 
 public interface SainsBurysItemInfo {
 
-    String getKclper100g();
-    String getDescription();
+    Optional<String> getKclper100g();
+    Optional<String> getDescription();
 
 }

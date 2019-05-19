@@ -4,5 +4,5 @@ import java.util.List;
 
 public interface SainsBurysItemList {
 
-    List<SainsBurysItem> getItemList();
+    List<SainsBurysItemImpl> getItemList();
 }

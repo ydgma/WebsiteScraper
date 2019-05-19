@@ -38,20 +38,23 @@ public class SainsBurysItemImpl implements SainsBurysItem{
     }
 
     @Override
-    public String getKcal_per_100g() {
+    public Optional<String> getKcal_per_100g() {
         return sainsBurysItemInfo.getKclper100g();
     }
 
     @Override
     public BigDecimal getUnit_price() {
         String priceInString = element.getElementsByClass("pricePerUnit")
-                .text().replaceAll("[^\\d.]","");
+                .first()
+                .text();
+
+        priceInString = priceInString.replaceAll("[^\\d.]","");
 
         return new BigDecimal(priceInString);
     }
 
     @Override
-    public String getDescription() {
+    public Optional<String> getDescription() {
        return sainsBurysItemInfo.getDescription();
     }
 
