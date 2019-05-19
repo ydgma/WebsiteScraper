@@ -3,11 +3,14 @@ package com.ydprojects.websitescraper.components.sainsburysitem;
 
 import org.jsoup.nodes.Element;
 
+import java.math.BigDecimal;
+import java.util.Optional;
+
 public interface SainsBurysItem {
 
     String getTitle();
     String getKcal_per_100g();
-    String getUnit_price();
+    BigDecimal getUnit_price();
     String getDescription();
     Element getElement();
 

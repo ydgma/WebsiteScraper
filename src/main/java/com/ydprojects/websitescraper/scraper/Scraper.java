@@ -9,16 +9,16 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-
 
 public class Scraper {
     private static final Logger LOG = LoggerFactory.getLogger(Scraper.class);
     private Function<List<Element>,Element> getElement = (k) -> k.stream()
             .findFirst()
             .get();
-
 
     private Document document;
 
@@ -55,13 +55,12 @@ public class Scraper {
     }
 
     public Element getChildClassWithTextContaining(String parentClassId, String childClassName, String textToExpect) {
-        List<Element> listOfElements = getChildClasses(parentClassId,childClassName);
-
         return getChildClasses(parentClassId,childClassName)
                 .stream()
                 .filter(element -> element.text().contains(textToExpect))
                 .findFirst()
                 .get();
+
     }
 
 

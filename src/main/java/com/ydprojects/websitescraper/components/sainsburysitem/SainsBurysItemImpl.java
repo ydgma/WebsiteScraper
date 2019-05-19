@@ -3,6 +3,9 @@ package com.ydprojects.websitescraper.components.sainsburysitem;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
+import javax.swing.text.html.Option;
+import java.math.BigDecimal;
+import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -40,8 +43,11 @@ public class SainsBurysItemImpl implements SainsBurysItem{
     }
 
     @Override
-    public String getUnit_price() {
-        return element.getElementsByClass("pricePerUnit").text();
+    public BigDecimal getUnit_price() {
+        String priceInString = element.getElementsByClass("pricePerUnit")
+                .text().replaceAll("[^\\d.]","");
+
+        return new BigDecimal(priceInString);
     }
 
     @Override

@@ -2,6 +2,8 @@ package com.ydprojects.websitescraper.components.sainsburysitem;
 
 import com.ydprojects.websitescraper.scraper.Scraper;
 
+import java.util.Optional;
+
 public class SainsBurysItemInfoImpl implements SainsBurysItemInfo{
 
     Scraper scraper;
@@ -12,7 +14,9 @@ public class SainsBurysItemInfoImpl implements SainsBurysItemInfo{
 
     @Override
     public String getKclper100g() {
-       return scraper.getChildClassWithTextContaining("information","nutritionLevel1","kcal").text();
+
+       return scraper.getChildClassWithTextContaining("information","nutritionLevel1","kcal")
+               .text().replaceAll("[^\\d]","");
     }
 
     @Override

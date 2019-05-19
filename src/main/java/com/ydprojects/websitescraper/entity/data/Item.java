@@ -1,11 +1,14 @@
 package com.ydprojects.websitescraper.entity.data;
 
+import com.ydprojects.websitescraper.components.sainsburysitem.SainsBurysItem;
+
 public class Item {
 
     private String title;
     private String kcal_per_100g;
     private String unit_price;
     private String description;
+    private SainsBurysItem sainsBurysItem;
 
 
     public Item(String title, String kcal_per_100g, String unit_price, String description) {
@@ -14,5 +17,4 @@ public class Item {
         this.unit_price = unit_price;
         this.description = description;
     }
-
 }
