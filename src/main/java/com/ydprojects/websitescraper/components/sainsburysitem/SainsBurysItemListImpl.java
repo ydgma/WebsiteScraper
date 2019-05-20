@@ -10,13 +10,14 @@ import java.util.List;
 
 public class SainsBurysItemListImpl implements SainsBurysItemList {
     private static final Logger LOG = LoggerFactory.getLogger(SainsBurysItemListImpl.class);
-    private static final String URL = "https://jsainsburyplc.github.io/serverside-test/site/www.sainsburys.co.uk/webapp/wcs/stores/servlet/gb/groceries/berries-cherries-currants6039.html";
+    private Scraper scraper;
+    private String pageUrl;
     private Document document;
     private List<SainsBurysItemImpl> listOfItems = new ArrayList<>();
-    Scraper scraper;
 
-    public SainsBurysItemListImpl() {
-        this.scraper = new Scraper(URL);
+    public SainsBurysItemListImpl(String pageUrl) {
+        this.pageUrl = pageUrl;
+        this.scraper = new Scraper(pageUrl);
         this.document = scraper.getPage();
     }
 
@@ -25,7 +26,7 @@ public class SainsBurysItemListImpl implements SainsBurysItemList {
     }
 
     private void populateItemList() {
-        scraper.getChildClasses("productLister","gridItem")
+        scraper.getChildClasses("productLister", "gridItem")
                 .forEach(element -> listOfItems.add(new SainsBurysItemImpl(element)));
     }
 

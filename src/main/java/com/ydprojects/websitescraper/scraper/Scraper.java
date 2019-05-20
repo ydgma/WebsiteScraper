@@ -15,8 +15,8 @@ import java.util.Optional;
 
 public class Scraper {
     private static final Logger LOG = LoggerFactory.getLogger(Scraper.class);
-    private Document document;
     private static final String TAG_NAME = "p";
+    private Document document;
 
     public Scraper(String url) {
 
@@ -41,7 +41,7 @@ public class Scraper {
 
     }
 
-    public Optional<String> getChildClassContainingTextByParentId(String parentClassId, String childClassName,String textToContain) {
+    public Optional<String> getChildClassContainingTextByParentId(String parentClassId, String childClassName, String textToContain) {
         return document.getElementById(parentClassId).getElementsByClass(childClassName)
                 .stream()
                 .filter(element -> element.text().contains(textToContain))

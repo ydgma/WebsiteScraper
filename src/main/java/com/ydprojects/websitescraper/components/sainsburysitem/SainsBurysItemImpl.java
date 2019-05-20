@@ -9,13 +9,13 @@ import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class SainsBurysItemImpl implements SainsBurysItem{
+public class SainsBurysItemImpl implements SainsBurysItem {
     private static final Logger LOG = LoggerFactory.getLogger(SainsBurysItem.class);
+    private static final String INITIAL_URL = "https://jsainsburyplc.github.io/serverside-test/site/www.sainsburys.co.uk/";
     private Element element;
     private SainsBurysItemInfo sainsBurysItemInfo;
-    private static final String INITIAL_URL = "https://jsainsburyplc.github.io/serverside-test/site/www.sainsburys.co.uk/";
 
-    public SainsBurysItemImpl (Element element) {
+    public SainsBurysItemImpl(Element element) {
         this.element = element;
         sainsBurysItemInfo = new SainsBurysItemInfoImpl(createItemInfoUrl());
     }
@@ -48,14 +48,14 @@ public class SainsBurysItemImpl implements SainsBurysItem{
                 .first()
                 .text();
 
-        priceInString = priceInString.replaceAll("[^\\d.]","");
+        priceInString = priceInString.replaceAll("[^\\d.]", "");
 
         return new BigDecimal(priceInString);
     }
 
     @Override
     public Optional<String> getDescription() {
-       return sainsBurysItemInfo.getDescription();
+        return sainsBurysItemInfo.getDescription();
     }
 
     @Override

@@ -1,9 +1,9 @@
-package com.ydprojects.websitescraper.entity.mapper;
+package com.ydprojects.websitescraper.entity.util;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ydprojects.websitescraper.entity.data.Item;
-import com.ydprojects.websitescraper.results.builder.Results;
+import com.ydprojects.websitescraper.results.Results;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

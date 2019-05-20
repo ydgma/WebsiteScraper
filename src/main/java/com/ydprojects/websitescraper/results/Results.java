@@ -1,10 +1,11 @@
-package com.ydprojects.websitescraper.results.builder;
+package com.ydprojects.websitescraper.results;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ydprojects.websitescraper.components.sainsburysitem.SainsBurysItemImpl;
 import com.ydprojects.websitescraper.components.sainsburysitem.SainsBurysItemListImpl;
 import com.ydprojects.websitescraper.entity.data.Item;
+import com.ydprojects.websitescraper.results.util.TotalCalculatorUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,12 +18,15 @@ import java.util.Map;
 
 public class Results {
     private static final Logger LOG = LoggerFactory.getLogger(Results.class);
-    private static final List<SainsBurysItemImpl> listOfValuesScraped = new SainsBurysItemListImpl().getItemList();
+    private List<SainsBurysItemImpl> listOfValuesScraped;
     private List<Item> itemList = new ArrayList<>();
+    private String pageUrl;
     private Map<String, BigDecimal> total = new HashMap<>();
     private ObjectMapper mapper = new ObjectMapper();
 
-    public Results() {
+    public Results(String pageUrl) {
+        this.pageUrl = pageUrl;
+        listOfValuesScraped = new SainsBurysItemListImpl(pageUrl).getItemList();
         populateItems();
         setTotal();
     }
@@ -40,30 +44,9 @@ public class Results {
                 .forEach(sainsBurysItem -> itemList.add(new Item(sainsBurysItem)));
     }
 
-    public BigDecimal calculateGross(List<Item> listOfItems) {
-        BigDecimal initial = new BigDecimal(0);
-
-        for (Item item : listOfItems) {
-            BigDecimal fromNewITem = item.getUnit_price();
-            initial = initial.add(fromNewITem);
-        }
-
-        BigDecimal gross = initial.setScale(2, BigDecimal.ROUND_HALF_EVEN);
-        return gross;
-    }
-
-    public BigDecimal calculateVat(BigDecimal gross) {
-        BigDecimal vatPercentage = new BigDecimal(1.20);
-        BigDecimal vat = gross.divide(vatPercentage, 2, BigDecimal.ROUND_HALF_EVEN);
-        vat = vat.subtract(gross).multiply(new BigDecimal(-1));
-
-        BigDecimal vatRounded = vat.setScale(2, BigDecimal.ROUND_HALF_EVEN);
-        return vatRounded;
-    }
-
     private void setTotal() {
-        BigDecimal gross = calculateGross(itemList);
-        BigDecimal vat = calculateVat(gross);
+        BigDecimal gross = TotalCalculatorUtil.calculateGross(itemList);
+        BigDecimal vat = TotalCalculatorUtil.calculateVat(gross);
         total.put("gross", gross);
         total.put("vat", vat);
     }
