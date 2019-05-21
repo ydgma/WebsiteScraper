@@ -7,16 +7,16 @@ import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class SainsBurysItemListImpl implements SainsBurysItemList {
     private static final Logger LOG = LoggerFactory.getLogger(SainsBurysItemListImpl.class);
     private Scraper scraper;
-    private String pageUrl;
     private Document document;
     private List<SainsBurysItemImpl> listOfItems = new ArrayList<>();
 
     public SainsBurysItemListImpl(String pageUrl) {
-        this.pageUrl = pageUrl;
+        Objects.requireNonNull(pageUrl,"pageUrl cannot be null");
         this.scraper = new Scraper(pageUrl);
         this.document = scraper.getPage();
     }

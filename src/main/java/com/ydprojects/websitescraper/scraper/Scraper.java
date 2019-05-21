@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 
@@ -17,14 +18,11 @@ public class Scraper {
     private static final Logger LOG = LoggerFactory.getLogger(Scraper.class);
     private static final String TAG_NAME = "p";
     private Document document;
+    private String url;
 
     public Scraper(String url) {
-
-        try {
-            document = Jsoup.connect(url).get();
-        } catch (IOException e) {
-            LOG.info("{}", e);
-        }
+        this.url = Objects.requireNonNull(url,"url cannot be null");
+        getDocumentFromUrl();
     }
 
     public Document getPage() {
@@ -60,6 +58,14 @@ public class Scraper {
                         .findFirst()
                         .map(Elements::text)).get();
 
+    }
+
+    private void getDocumentFromUrl() {
+        try {
+            document = Jsoup.connect(url).get();
+        } catch (IOException e) {
+            LOG.info("{}", e);
+        }
     }
 
 }

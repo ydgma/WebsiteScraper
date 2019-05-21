@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 import java.util.Optional;
 
 public class SainsBurysItemImpl implements SainsBurysItem {
@@ -14,11 +15,12 @@ public class SainsBurysItemImpl implements SainsBurysItem {
     private SainsBurysItemInfo sainsBurysItemInfo;
 
     public SainsBurysItemImpl(Element element) {
-        this.element = element;
+        this.element = Objects.requireNonNull(element, "Element cannot be a null");
         sainsBurysItemInfo = new SainsBurysItemInfoImpl(createItemInfoUrl());
     }
 
     private String createItemInfoUrl() {
+        LOG.info("Creating item url");
         return element.getElementsByClass("productNameAndPromotions")
                 .first()
                 .getElementsByTag("h3")

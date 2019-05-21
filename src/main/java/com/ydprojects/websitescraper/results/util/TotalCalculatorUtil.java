@@ -11,12 +11,11 @@ public class TotalCalculatorUtil {
         // hiding public constructor
     }
 
-    public static BigDecimal calculateGross(List<Item> listOfItems) {
+    public static BigDecimal calculateGross(List<BigDecimal> listOfValues) {
         BigDecimal initial = new BigDecimal(0);
 
-        for (Item item : listOfItems) {
-            BigDecimal fromNewITem = item.getUnit_price();
-            initial = initial.add(fromNewITem);
+        for (BigDecimal value : listOfValues) {
+            initial = initial.add(value);
         }
 
         BigDecimal gross = initial.setScale(2, BigDecimal.ROUND_HALF_EVEN);

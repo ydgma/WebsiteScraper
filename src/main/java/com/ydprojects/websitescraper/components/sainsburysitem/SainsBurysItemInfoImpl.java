@@ -4,6 +4,7 @@ import com.ydprojects.websitescraper.scraper.Scraper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Objects;
 import java.util.Optional;
 
 public class SainsBurysItemInfoImpl implements SainsBurysItemInfo {
@@ -12,6 +13,7 @@ public class SainsBurysItemInfoImpl implements SainsBurysItemInfo {
     private Scraper scraper;
 
     public SainsBurysItemInfoImpl(String url) {
+        Objects.requireNonNull(url,"url cannot be null");
         scraper = new Scraper(url);
     }
 
