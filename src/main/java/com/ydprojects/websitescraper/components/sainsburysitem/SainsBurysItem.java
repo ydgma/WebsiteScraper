@@ -10,7 +10,7 @@ public interface SainsBurysItem {
 
     String getTitle();
 
-    Optional<String> getKcal_per_100g();
+    Optional<Integer> getKcal_per_100g();
 
     BigDecimal getUnit_price();
 

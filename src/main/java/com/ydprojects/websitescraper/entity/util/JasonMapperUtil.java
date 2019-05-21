@@ -12,27 +12,27 @@ public class JasonMapperUtil {
     private static ObjectMapper mapper = new ObjectMapper();
 
     private JasonMapperUtil() {
-
+        // hiding public constructor
     }
 
-    public static String getResultsAsAJasonString(Results results) {
+    public static String getResultsAsAJsonString(Results results) {
         String returnString = "";
         try {
-            returnString = new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(results);
+            returnString = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(results);
         } catch (JsonProcessingException e) {
-            LOG.info("{}", e);
+            LOG.info("Could not parse the Json String {}", e);
         }
-        return !returnString.equals("") ? returnString : "returned an empty string see logs for details";
+        return returnString;
     }
 
-    public static String getItemAsAJasonString(Item item) {
+    public static String getItemAsAJsonString(Item item) {
         String returnString = "";
         try {
-            returnString = new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(item);
+            returnString = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(item);
         } catch (JsonProcessingException e) {
-            LOG.info("{}", e);
+            LOG.info("Could not parse the Json String {}", e);
         }
-        return !returnString.equals("") ? returnString : "returned an empty string see logs for details";
+        return returnString;
     }
 
 

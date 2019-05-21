@@ -8,7 +8,7 @@ import java.util.List;
 public class TotalCalculatorUtil {
 
     private TotalCalculatorUtil() {
-
+        // hiding public constructor
     }
 
     public static BigDecimal calculateGross(List<Item> listOfItems) {

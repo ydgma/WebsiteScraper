@@ -7,13 +7,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import static com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 public class Item {
     private static final Logger LOG = LoggerFactory.getLogger(Item.class);
-    private static final String EMPTY_STRING = "";
     private SainsBurysItem sainsBurysItem;
 
     public Item(SainsBurysItemImpl sainsBurysItem) {
@@ -24,16 +24,15 @@ public class Item {
         return sainsBurysItem.getTitle();
     }
 
-    @JsonInclude(Include.NON_EMPTY)
-    public String getKcal_per_100g() {
-        Optional<String> optional = sainsBurysItem.getKcal_per_100g();
-        return optional.orElse(EMPTY_STRING);
+    @JsonInclude(Include.NON_NULL)
+    public Integer getKcal_per_100g() {
+        Optional<Integer> optional = sainsBurysItem.getKcal_per_100g();
+        return optional.orElse(null);
     }
 
-    @JsonInclude(Include.NON_EMPTY)
     public String getDescription() {
         Optional<String> optional = sainsBurysItem.getDescription();
-        return optional.orElse(EMPTY_STRING);
+        return optional.orElseThrow(() -> new NoSuchElementException("Item description could not be found"));
     }
 
     public BigDecimal getUnit_price() {

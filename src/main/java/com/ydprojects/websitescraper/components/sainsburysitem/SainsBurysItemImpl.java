@@ -6,12 +6,10 @@ import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
 import java.util.Optional;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class SainsBurysItemImpl implements SainsBurysItem {
     private static final Logger LOG = LoggerFactory.getLogger(SainsBurysItem.class);
-    private static final String INITIAL_URL = "https://jsainsburyplc.github.io/serverside-test/site/www.sainsburys.co.uk/";
+
     private Element element;
     private SainsBurysItemInfo sainsBurysItemInfo;
 
@@ -21,13 +19,15 @@ public class SainsBurysItemImpl implements SainsBurysItem {
     }
 
     private String createItemInfoUrl() {
-        String extractedHTML = element.getElementsByClass("productNameAndPromotions").first().html();
-        String regex = "\">.*|\\../|.*?f=\"";
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(extractedHTML);
-        extractedHTML = matcher.replaceAll("");
-
-        return INITIAL_URL + extractedHTML;
+        return element.getElementsByClass("productNameAndPromotions")
+                .first()
+                .getElementsByTag("h3")
+                .first()
+                .childNodes().stream()
+                .filter(node -> node.attributes().hasKey("href"))
+                .findFirst()
+                .map(node -> node.attr("abs:href"))
+                .get();
     }
 
     @Override
@@ -38,7 +38,7 @@ public class SainsBurysItemImpl implements SainsBurysItem {
     }
 
     @Override
-    public Optional<String> getKcal_per_100g() {
+    public Optional<Integer> getKcal_per_100g() {
         return sainsBurysItemInfo.getKclper100g();
     }
 
