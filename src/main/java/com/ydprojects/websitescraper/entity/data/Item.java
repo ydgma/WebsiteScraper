@@ -1,6 +1,7 @@
 package com.ydprojects.websitescraper.entity.data;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.ydprojects.websitescraper.components.sainsburysitem.SainsBurysItem;
 import com.ydprojects.websitescraper.components.sainsburysitem.SainsBurysItemImpl;
 import org.slf4j.Logger;
@@ -12,6 +13,7 @@ import java.util.Optional;
 
 import static com.fasterxml.jackson.annotation.JsonInclude.Include;
 
+@JsonPropertyOrder({ "title", "kcal_per_100g", "unit_price", "description"})
 public class Item {
     private static final Logger LOG = LoggerFactory.getLogger(Item.class);
     private SainsBurysItem sainsBurysItem;
@@ -30,14 +32,13 @@ public class Item {
         return optional.orElse(null);
     }
 
-    public String getDescription() {
-        Optional<String> optional = sainsBurysItem.getDescription();
-        return optional.orElseThrow(() -> new NoSuchElementException("Item description could not be found"));
-    }
-
     public BigDecimal getUnit_price() {
         return sainsBurysItem.getUnit_price();
 
     }
 
+    public String getDescription() {
+        Optional<String> optional = sainsBurysItem.getDescription();
+        return optional.orElseThrow(() -> new NoSuchElementException("Item description could not be found"));
+    }
 }

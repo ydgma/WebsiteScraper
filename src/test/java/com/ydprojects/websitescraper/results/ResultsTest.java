@@ -47,8 +47,8 @@ public class ResultsTest {
 
     @Test
     public void testGetItemList() {
-        when(results.getItemList()).thenReturn(listOfItems);
-        assertEquals(listOfItems, results.getItemList());
+        when(results.getResults()).thenReturn(listOfItems);
+        assertEquals(listOfItems, results.getResults());
     }
 
     @Test
