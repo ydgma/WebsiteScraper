@@ -1,7 +1,5 @@
 package com.ydprojects.websitescraper.results.util;
 
-import com.ydprojects.websitescraper.entity.data.Item;
-
 import java.math.BigDecimal;
 import java.util.List;
 
