@@ -29,7 +29,7 @@ public class Scraper {
         return document;
     }
 
-    public List<Element> getChildClasses(String parentClassId, String childClassName) {
+    public List<Element> getChildClassesFromParentByParentIdAndChildName(String parentClassId, String childClassName) {
         List<Element> listOfChildClasses;
 
         listOfChildClasses = new ArrayList<>(document.getElementById(parentClassId)
@@ -47,7 +47,7 @@ public class Scraper {
                 .map(Element::text);
     }
 
-    public Optional<String> getFIrstParagraphFromAChildClass(String parentClassId, String childClassName) {
+    public Optional<String> getFirstParagraphFromAChildClass(String parentClassId, String childClassName) {
         return document.getElementById(parentClassId).getElementsByClass(childClassName)
                 .stream()
                 .findFirst()
@@ -64,7 +64,7 @@ public class Scraper {
         try {
             document = Jsoup.connect(url).get();
         } catch (IOException e) {
-            LOG.info("{}", e);
+            LOG.info("{}", e.getMessage());
         }
     }
 

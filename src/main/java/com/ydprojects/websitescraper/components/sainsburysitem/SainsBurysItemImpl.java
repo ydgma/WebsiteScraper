@@ -20,7 +20,6 @@ public class SainsBurysItemImpl implements SainsBurysItem {
     }
 
     private String createItemInfoUrl() {
-        LOG.info("Creating item url");
         return element.getElementsByClass("productNameAndPromotions")
                 .first()
                 .getElementsByTag("h3")

@@ -26,5 +26,7 @@ dependencies {
     compile "org.powermock:powermock-api-mockito:1.6.5"
 }
 
-
+test {
+    useJUnit()
+}
 mainClassName = 'com.ydprojects.websitescraper.Application'

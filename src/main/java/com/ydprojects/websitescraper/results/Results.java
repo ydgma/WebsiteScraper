@@ -1,9 +1,10 @@
 package com.ydprojects.websitescraper.results;
 
 
-import com.ydprojects.websitescraper.components.sainsburysitem.SainsBurysItemImpl;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ydprojects.websitescraper.components.sainsburysitem.SainsBurysItemListImpl;
 import com.ydprojects.websitescraper.entity.data.Item;
+import com.ydprojects.websitescraper.entity.util.JasonMapperUtil;
 import com.ydprojects.websitescraper.results.util.TotalCalculatorUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,6 +47,11 @@ public class Results {
         BigDecimal vat = TotalCalculatorUtil.calculateVat(gross);
         total.put("gross", gross);
         total.put("vat", vat);
+    }
+
+    @JsonIgnore
+    public String getResultsAsJason() {
+        return JasonMapperUtil.getResultsAsAJsonString(this);
     }
 
 }
