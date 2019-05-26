@@ -10,28 +10,26 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 
 public class Scraper {
     private static final Logger LOG = LoggerFactory.getLogger(Scraper.class);
-    private Document document;
     private static final String TAG_NAME = "p";
+    private Document document;
+    private String url;
 
     public Scraper(String url) {
-
-        try {
-            document = Jsoup.connect(url).get();
-        } catch (IOException e) {
-            LOG.info("{}", e);
-        }
+        this.url = Objects.requireNonNull(url,"url cannot be null");
+        getDocumentFromUrl();
     }
 
     public Document getPage() {
         return document;
     }
 
-    public List<Element> getChildClasses(String parentClassId, String childClassName) {
+    public List<Element> getChildClassesFromParentByParentIdAndChildName(String parentClassId, String childClassName) {
         List<Element> listOfChildClasses;
 
         listOfChildClasses = new ArrayList<>(document.getElementById(parentClassId)
@@ -41,7 +39,7 @@ public class Scraper {
 
     }
 
-    public Optional<String> getChildClassContainingTextByParentId(String parentClassId, String childClassName,String textToContain) {
+    public Optional<String> getChildClassContainingTextByParentId(String parentClassId, String childClassName, String textToContain) {
         return document.getElementById(parentClassId).getElementsByClass(childClassName)
                 .stream()
                 .filter(element -> element.text().contains(textToContain))
@@ -49,7 +47,7 @@ public class Scraper {
                 .map(Element::text);
     }
 
-    public Optional<String> getFIrstParagraphFromAChildClass(String parentClassId, String childClassName) {
+    public Optional<String> getFirstParagraphFromAChildClass(String parentClassId, String childClassName) {
         return document.getElementById(parentClassId).getElementsByClass(childClassName)
                 .stream()
                 .findFirst()
@@ -60,6 +58,14 @@ public class Scraper {
                         .findFirst()
                         .map(Elements::text)).get();
 
+    }
+
+    private void getDocumentFromUrl() {
+        try {
+            document = Jsoup.connect(url).get();
+        } catch (IOException e) {
+            LOG.info("{}", e.getMessage());
+        }
     }
 
 }

@@ -1,12 +1,14 @@
 package com.ydprojects.websitescraper;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import com.ydprojects.websitescraper.entity.util.JasonMapperUtil;
+import com.ydprojects.websitescraper.results.Results;
 
 public class Application {
-    private static final Logger LOG = LoggerFactory.getLogger(Application.class);
+    private static final String URL = "https://jsainsburyplc.github.io/serverside-test/site/www.sainsburys.co.uk/webapp/wcs/stores/servlet/gb/groceries/berries-cherries-currants6039.html";
 
     public static void main(String[] args) {
-       LOG.info("working");
+        Results results = new Results(URL);
+        System.out.println(JasonMapperUtil.getResultsAsAJsonString(results));
     }
 }
