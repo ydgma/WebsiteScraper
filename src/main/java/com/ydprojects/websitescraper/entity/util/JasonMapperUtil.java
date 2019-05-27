@@ -1,8 +1,6 @@
 package com.ydprojects.websitescraper.entity.util;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.util.DefaultIndenter;
-import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.ydprojects.websitescraper.entity.data.Item;
@@ -21,8 +19,7 @@ public class JasonMapperUtil {
     public static String getResultsAsAJsonString(Results results) {
         // setting indentation between elements in the array
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
-        DefaultPrettyPrinter prettyPrinter = new DefaultPrettyPrinter();
-        prettyPrinter.indentArraysWith(DefaultIndenter.SYSTEM_LINEFEED_INSTANCE);
+        CustomPrettyPrinter prettyPrinter = new CustomPrettyPrinter();
 
         String returnString = "";
         try {

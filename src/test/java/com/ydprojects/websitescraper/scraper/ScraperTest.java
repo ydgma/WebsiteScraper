@@ -63,8 +63,8 @@ public class ScraperTest {
 
     @Test
     public void testGetChildClassContainingTextByParentId() {
-        when(scraper.getChildClassContainingTextByParentId(anyString(), anyString(), anyString())).thenReturn(result);
-        assertEquals(result, scraper.getChildClassContainingTextByParentId(parentId, childClassName, "textToContain"));
+        when(scraper.getTextFromAChildByUsingParentAndPartOfExpectedText(anyString(), anyString(), anyString())).thenReturn(result);
+        assertEquals(result, scraper.getTextFromAChildByUsingParentAndPartOfExpectedText(parentId, childClassName, "textToContain"));
     }
 
     @Test
