@@ -14,9 +14,9 @@
 
 
 ## TODO
-* improve line coverage for unit tests
-* Add functionality to custom pretty printer to have a white space because the last jason object in an array
-* Add more Java docs and Loglines where nessessary 
+* Improve line coverage for unit tests (and unit tests in general)
+* Add functionality to CustomPrettyPrinter class to have a white space before the last object of an array 
+* Add more Java Docs and Log-lines where necessary
 
 
 
