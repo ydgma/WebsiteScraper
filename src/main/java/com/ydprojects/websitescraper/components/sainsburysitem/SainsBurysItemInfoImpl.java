@@ -19,7 +19,7 @@ public class SainsBurysItemInfoImpl implements SainsBurysItemInfo {
 
     @Override
     public Optional<Integer> getKclper100g() {
-        Optional<String> optional = scraper.getChildClassContainingTextByParentId(PARENT_CLASS_ID, "tableRow0", "kcal");
+        Optional<String> optional = scraper.getTextFromAChildByUsingParentAndPartOfExpectedText(PARENT_CLASS_ID, "tableRow0", "kcal");
 
         return optional.map(s -> Integer.parseInt(s.replaceAll("kcal.*", "")));
     }
