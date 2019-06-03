@@ -19,6 +19,7 @@ public class SainsBurysItemListImpl implements SainsBurysItemList {
         Objects.requireNonNull(pageUrl,"pageUrl cannot be null");
         this.scraper = new Scraper(pageUrl);
         this.document = scraper.getPage();
+        populateItemList();
     }
 
     public SainsBurysItemListImpl(Document document) {
@@ -32,7 +33,6 @@ public class SainsBurysItemListImpl implements SainsBurysItemList {
 
     @Override
     public List<SainsBurysItemImpl> getItemList() {
-        populateItemList();
         return listOfItems;
     }
 
