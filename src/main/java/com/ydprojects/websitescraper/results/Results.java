@@ -38,8 +38,7 @@ public class Results {
     }
 
     private void populateItems() {
-        new SainsBurysItemListImpl(pageUrl).getItemList()
-                .forEach(sainsBurysItem -> results.add(new Item(sainsBurysItem)));
+        results = new SainsBurysItemListImpl(pageUrl).getItemList();
     }
 
     private void setTotal() {
