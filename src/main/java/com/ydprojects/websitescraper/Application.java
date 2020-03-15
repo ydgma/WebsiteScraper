@@ -9,7 +9,7 @@ public class Application {
     private static final String URL = "https://jsainsburyplc.github.io/serverside-test/site/www.sainsburys.co.uk/webapp/wcs/stores/servlet/gb/groceries/berries-cherries-currants6039.html";
 
     public static void main(String[] args) {
-        LOG.trace("Creating a list of with the url {}", URL);
+        LOG.trace("Creating a list of items with the url {}", URL);
         Results results = new Results(URL);
         System.out.println(results.getResultsAsJason());
     }
