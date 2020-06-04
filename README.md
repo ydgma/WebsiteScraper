@@ -17,7 +17,7 @@
 * Improve line coverage for unit tests (and unit tests in general)
 * Add functionality to CustomPrettyPrinter class to have a white space before the last object of an array 
 * Add more Java Docs and Log-lines where necessary
-
+* Decouple classes and investigate about seperation of concerns 
 
 
 
